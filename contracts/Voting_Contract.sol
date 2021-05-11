@@ -20,11 +20,12 @@ contract Voting{
     mapping(uint256 => Candidate) public candidateLookup; //candidates will be identified with an unique ID
     uint256 public candidateCount; //Will be used to track the number of candidates
     
-    enum State {beforeStart, running, afterEnd, halted} 
+    enum State {beforeStart, running, halted} 
+    State public electionState;
+    
     event AddedCandidate(string _name);
     event Voted( uint256 id, string _name);
-    
-    State public electionState;
+
     
     constructor () {
         moderator = msg.sender;
@@ -35,6 +36,11 @@ contract Voting{
     
     modifier onlyModerator{
         require(msg.sender == moderator, 'Only the moderator of the election can use this function');
+        _;
+    }
+    
+    modifier votingInProcess {
+        require(electionState == State.running, 'The election is not active at this moment');
         _;
     }
     
@@ -66,7 +72,16 @@ contract Voting{
 
     }
     
-    function vote(uint256 _id, string memory _name) public returns(bool){
+    
+    function startVoting() external onlyModerator {
+        electionState = State.running;
+    }
+    
+    function haltVoting() external onlyModerator {
+        electionState = State.halted;
+    }
+    
+    function vote(uint256 _id, string memory _name) public votingInProcess returns (bool){
         Voter storage newVoter = votes[msg.sender];
         require(_id >= 0 && _id <= candidateCount, 'There is no candidate with the specified ID');
         require(newVoter.hasVoted[msg.sender] == false, 'You can only vote one time!');
