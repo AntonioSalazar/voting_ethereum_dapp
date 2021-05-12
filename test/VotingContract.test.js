@@ -19,5 +19,7 @@ it('Can add a candidate', async() => {
     let voteCount = 0;
     await instance.addCandidate(newCandidateName, {from: moderator});
     let request = await instance.candidateLookup.call(id);
-    console.log(request.toString());
+    assert.equal(request[0], id);
+    assert.equal(request[1], newCandidateName);
+    assert.equal(request[2], voteCount);
 });
