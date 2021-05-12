@@ -55,10 +55,10 @@ contract VotingContract{
         return true;
     }
     
-    function getCandidate(uint256 _id) public view returns(uint256, string memory){
+    function getCandidate(uint256 _id) public view returns(string memory, uint256){
        string memory name = candidateLookup[_id].name;
        uint256 voteCount = candidateLookup[_id].voteCount;
-       return (voteCount, name);
+       return (name, voteCount);
     }
     
     function getCandidates() external view returns(string[] memory, uint256[] memory){
