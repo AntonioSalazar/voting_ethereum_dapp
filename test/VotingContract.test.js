@@ -46,6 +46,10 @@ it('can get all candidates', async() => {
 
 it('can vote', async() => {
     let instance = await VotingContract.deployed();
-    await instance.vote(id, voter, {from: accounts[1]});
-    
+    let choosedCandidateId = 0;
+    await instance.startVoting({from: moderator}); //Change the state of the election to running
+    await instance.vote(choosedCandidateId, voter, {from: accounts[1]});
+    let getCandidate = await instance.getCandidate(id);
+    let getCandidateVoteCount = getCandidate[1].toNumber();
+    assert.equal(getCandidateVoteCount, 1);
 })
