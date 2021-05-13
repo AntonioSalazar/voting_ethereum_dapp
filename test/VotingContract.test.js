@@ -8,7 +8,8 @@ let accounts;
 let owner;
 let id = 0;
 let candidate1 = 'Candidate1';
-let candidate2 = 'Candidate2'
+let candidate2 = 'Candidate2';
+let voter = 'voter1';
 let voteCount = 0;
 contract('VotingContract', async(accs) => {
     accounts = accs;
@@ -39,6 +40,12 @@ it('can get all candidates', async() => {
     let getCandidates = await instance.getCandidates();
     assert.equal(getCandidates[0][0], candidate1); // candidate1 -name
     assert.equal(getCandidates[1][0], 0);          // candidate1 -number of votes   
-    assert.equal(getCandidates[0][1], candidate2);// candidate2 -name
-    assert.equal(getCandidates[1][1], 0)          // candidate2 -number of votes 
+    assert.equal(getCandidates[0][1], candidate2); // candidate2 -name
+    assert.equal(getCandidates[1][1], 0)           // candidate2 -number of votes 
+})
+
+it('can vote', async() => {
+    let instance = await VotingContract.deployed();
+    await instance.vote(id, voter, {from: accounts[1]});
+    
 })
