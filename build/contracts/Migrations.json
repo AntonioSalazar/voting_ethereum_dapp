@@ -2191,15 +2191,21 @@
     "version": "0.8.4+commit.c7e474f2.Linux.g++"
   },
   "networks": {
+    "4": {
+      "events": {},
+      "links": {},
+      "address": "0x59EcE55d4775c3C072f0f369501333302A75F44D",
+      "transactionHash": "0x3fc46411d90ec8dc3f1bb74e6c60357339f2da779d26fd774fdbb56b0177cba5"
+    },
     "5777": {
       "events": {},
       "links": {},
-      "address": "0x2bAe5825D6fAae373388963E3fe1C24201Bd3034",
-      "transactionHash": "0xae0e1ce4195f267e631931f838d21ba77daac840432e129186141c721bb877c5"
+      "address": "0xb1F1376BBf513EFACd75749C0f9c7A582B6C2362",
+      "transactionHash": "0x49665d93b60b710e82783d2881a9486bc8a77627c3d69d5757f9d172f5c50268"
     }
   },
   "schemaVersion": "3.3.4",
-  "updatedAt": "2021-05-13T16:19:37.183Z",
+  "updatedAt": "2021-05-13T17:30:06.730Z",
   "networkType": "ethereum",
   "devdoc": {
     "kind": "dev",
